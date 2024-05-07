@@ -4,28 +4,18 @@
 using namespace std;
 
 int main(void) {
-	int n, k;
+	int n, k, a = 0;
+	vector<int> v;
 	cin >> n >> k;
 	
-	vector<int> v;
-	int a = 0;
-	
-	for (int i = 1; i <= n; i++) {
+	for (int i = 1; i <= n; i++)
 		v.push_back(i);
-	}
 	
 	cout << '<';
-	
 	while(!v.empty()) {
-		for (int i = 0; i < k - 1; i++) {
-			if (a == v.size())
-				a = 0;
-			a = a < v.size() - 1 ? a + 1 : 0;
-		}
-		
+		a = (a += k - 1) >= v.size() - 1 ? a % v.size() : a;
 		cout << v[a];
 		v.erase(v.begin() + a);
-		
 		cout << (v.empty() ? ">" : ", ");
 	}
 	
